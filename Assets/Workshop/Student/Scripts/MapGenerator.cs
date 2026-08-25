@@ -20,15 +20,25 @@ namespace Workshop.Student
         };
 
         // 1. declare Players variable
-
+        public GameObject Player;
         // 7. declare Exit variable 
-
+        public GameObject Exit;
 
         public void Start()
         {
             // 1. random player at the position <0, 0> map
-
+            Instantiate(Player, new Vector2(0, 0), Quaternion.identity);
             // 2. create obstacles
+            for (int y = 0; y < rows / 2; y++)
+            {
+                GameObject obstacle = Instantiate(
+                    wallTiles[0],
+                    new Vector2(columns / 2, y),
+                    Quaternion.identity
+                );
+
+                obstacle.name = "Obstacle " + (columns / 2) + " " + y;
+            }
 
             // 3. create floor 
             for (int y = 0; y < rows; y++)
@@ -71,7 +81,7 @@ namespace Workshop.Student
 
             for (int y = 0; y < saveItemMap.GetLength(0); y++)
             {
-                for (int x = 0; x < saveItemMap.GetLength(1); y++)
+                for (int x = 0; x < saveItemMap.GetLength(1); x++)
                 {
                     string item = saveItemMap[x, y];
 
@@ -91,6 +101,11 @@ namespace Workshop.Student
             }
 
             // 7. place exit
+            Instantiate(
+    Exit,
+    new Vector2(columns - 1, rows - 1),
+    Quaternion.identity
+);
 
         }
     }
