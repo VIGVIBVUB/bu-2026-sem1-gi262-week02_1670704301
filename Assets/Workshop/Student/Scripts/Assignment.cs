@@ -11,22 +11,22 @@ namespace Assignment
         public void Start()
         {
             AS01_RandomItemDrop();
-            // AS02_NestedLoopForCreate2DMap();
-            // AS03_NestedLoopForMakingWallAround();
-            // AS04_AttackEnemy();
-            // AS05_DynamicIterationLoop();
-            // AS06_WhileLoopAndArray();
-            // AS07_HealTargetAtIndex();
-            // AS08_RandomPickingDialogue();
-            // AS09_MultiplicationTable();
-            // AS10_FindSummationFromZeroToNUsingWhileLoop();
-            // AS11_SpawnEnemies();
-            // StartCoroutine(AS12_CountTime());
-            // AS13_SumOfNumbersInRow();
-            // AS14_SumOfNumbersInColumn();
-            // AS15_MakeTheTriangle();
-            // AS16_MultiplicationTableOf_2_3_and_4();
-            // EX_01_TicTacToeGame_TurnPlay();
+            AS02_NestedLoopForCreate2DMap();
+            AS03_NestedLoopForMakingWallAround();
+            AS04_AttackEnemy();
+            AS05_DynamicIterationLoop();
+            AS06_WhileLoopAndArray();
+            AS07_HealTargetAtIndex();
+            AS08_RandomPickingDialogue();
+            AS09_MultiplicationTable();
+            AS10_FindSummationFromZeroToNUsingWhileLoop();
+            AS11_SpawnEnemies();
+            StartCoroutine(AS12_CountTime());
+            AS13_SumOfNumbersInRow();
+            AS14_SumOfNumbersInColumn();
+            AS15_MakeTheTriangle();
+            AS16_MultiplicationTableOf_2_3_and_4();
+            EX_01_TicTacToeGame_TurnPlay();
 
         }
 
@@ -46,7 +46,15 @@ namespace Assignment
         public GameObject[] as01_items;
         public void AS01_RandomItemDrop()
         {
-            throw new NotImplementedException();
+            int r = UnityEngine.Random.Range(0, as01_items.Length);
+
+            GameObject go = Instantiate(
+                as01_items[r],
+                transform.position,
+                Quaternion.identity
+            );
+
+            Debug.Log($"Got item: {go.name}");
         }
 
         /*
@@ -108,7 +116,29 @@ namespace Assignment
         public int as02_rows;
         public void AS02_NestedLoopForCreate2DMap()
         {
-            throw new NotImplementedException();
+            Debug.Log("Column ...");
+            Debug.Log(as02_columns);
+
+            Debug.Log("Row ...");
+            Debug.Log(as02_rows);
+
+            for (int y = 0; y < as02_rows; y++)
+            {
+                for (int x = 0; x < as02_columns; x++)
+                {
+                    int r = UnityEngine.Random.Range(0, as02_floorTiles.Length);
+
+                    GameObject tile = Instantiate(
+                        as02_floorTiles[r],
+                        new Vector2(x, y),
+                        Quaternion.identity
+                    );
+
+                    Debug.Log(tile.name);
+                }
+
+                Debug.Log("");
+            }
         }
 
         /*
@@ -202,7 +232,23 @@ namespace Assignment
         public int as03_rows;
         public void AS03_NestedLoopForMakingWallAround()
         {
-            throw new NotImplementedException();
+            for (int y = -1; y <= as03_rows; y++)
+            {
+                for (int x = -1; x <= as03_columns; x++)
+                {
+                    if (x == -1 ||
+                        x == as03_columns ||
+                        y == -1 ||
+                        y == as03_rows)
+                    {
+                        Instantiate(
+                            as03_wall,
+                            new Vector2(x, y),
+                            Quaternion.identity
+                        );
+                    }
+                }
+            }
         }
 
         /*
@@ -237,7 +283,30 @@ namespace Assignment
         public int as04_target;
         public void AS04_AttackEnemy()
         {
-            throw new NotImplementedException();
+            // รูปแบบที่ 1 : โจมตีตัวแรก
+            as04_enemyHP[0] -= as04_damage;
+
+            Debug.Log(
+                $"FirstEnemy hp :{as04_enemyHP[0]}"
+            );
+
+
+            // รูปแบบที่ 2 : โจมตีตัวสุดท้าย
+            int lastIndex = as04_enemyHP.Length - 1;
+
+            as04_enemyHP[lastIndex] -= as04_damage;
+
+            Debug.Log(
+                $"LastEnemy hp :{as04_enemyHP[lastIndex]}"
+            );
+
+
+            // รูปแบบที่ 3 : โจมตีตัวที่กำหนด
+            as04_enemyHP[as04_target] -= as04_damage;
+
+            Debug.Log(
+                $"TargetEnemy {as04_target} hp :{as04_enemyHP[as04_target]}"
+            );
         }
 
         /*
@@ -260,7 +329,10 @@ namespace Assignment
         public int as05_n;
         public void AS05_DynamicIterationLoop()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < as05_n; i++)
+            {
+                Debug.Log(i);
+            }
         }
 
         /*
@@ -309,7 +381,28 @@ namespace Assignment
         public string[] as06_ironManSuitNames;
         public void AS06_WhileLoopAndArray()
         {
-            throw new NotImplementedException();
+            Debug.Log("======Log by One======");
+
+            int i = 0;
+
+            while (i < as06_ironManSuitNames.Length)
+            {
+                Debug.Log(as06_ironManSuitNames[i]);
+
+                i += 1;
+            }
+
+
+            Debug.Log("======Log by Two======");
+
+            i = 0;
+
+            while (i < as06_ironManSuitNames.Length)
+            {
+                Debug.Log(as06_ironManSuitNames[i]);
+
+                i += 2;
+            }
         }
 
         /*
@@ -347,7 +440,30 @@ namespace Assignment
         public int as07_targetIndex;
         public void AS07_HealTargetAtIndex()
         {
-            throw new NotImplementedException();
+            // รูปแบบที่ 1 : Heal ตัวแรก
+            as07_heroHPs[0] += as07_heal;
+
+            Debug.Log(
+                $"FirstHero hp :{as07_heroHPs[0]}"
+            );
+
+
+            // รูปแบบที่ 2 : Heal ตัวสุดท้าย
+            int lastIndex = as07_heroHPs.Length - 1;
+
+            as07_heroHPs[lastIndex] += as07_heal;
+
+            Debug.Log(
+                $"LastHero hp :{as07_heroHPs[lastIndex]}"
+            );
+
+
+            // รูปแบบที่ 3 : Heal ตัวที่กำหนด
+            as07_heroHPs[as07_targetIndex] += as07_heal;
+
+            Debug.Log(
+                $"TargetHero {as07_targetIndex} hp :{as07_heroHPs[as07_targetIndex]}"
+            );
         }
 
         /*
@@ -374,7 +490,12 @@ namespace Assignment
         public string[] as08_dialogues;
         public void AS08_RandomPickingDialogue()
         {
-            throw new NotImplementedException();
+            int r = UnityEngine.Random.Range(
+                0,
+                as08_dialogues.Length
+            );
+
+            Debug.Log(as08_dialogues[r]);
         }
 
         /*
@@ -400,7 +521,12 @@ namespace Assignment
         public int as09_n;
         public void AS09_MultiplicationTable()
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= 12; i++)
+            {
+                Debug.Log(
+                    $"{as09_n}x{i}={as09_n * i}"
+                );
+            }
         }
 
         /*
@@ -426,7 +552,18 @@ namespace Assignment
         public int as10_n;
         public void AS10_FindSummationFromZeroToNUsingWhileLoop()
         {
-            throw new NotImplementedException();
+            int sum = 0;
+            int i = 1;
+
+            while (i <= as10_n)
+            {
+                sum += i;
+                i++;
+            }
+
+            Debug.Log(
+                $"ผลรวมของ n จาก 1 ถึง {as10_n} คือ {sum}"
+            );
 
         }
 
@@ -453,7 +590,14 @@ namespace Assignment
         public GameObject as11_enemyPrefab;
         public void AS11_SpawnEnemies()
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < as11_enemyHPs.Length; i++)
+            {
+                Instantiate(
+                    as11_enemyPrefab,
+                    transform.position + new Vector3(i + 1, 0, 0),
+                    Quaternion.identity
+                );
+            }
         }
 
         /*
@@ -466,7 +610,18 @@ namespace Assignment
         public float as12_countTime;
         public IEnumerator AS12_CountTime()
         {
-            throw new NotImplementedException();
+            float time = as12_countTime;
+
+            while (time > 0)
+            {
+                Debug.Log(time);
+
+                yield return new WaitForSeconds(1f);
+
+                time--;
+            }
+
+            Debug.Log("Time's up!");
         }
 
         /*
@@ -524,7 +679,18 @@ namespace Assignment
         public void AS13_SumOfNumbersInRow()
         {
             var matrix = as13_matrix.Get2DArray();
-            throw new NotImplementedException();
+            int sum = 0;
+
+            for (int column = 0;
+                 column < matrix.GetLength(1);
+                 column++)
+            {
+                sum += matrix[as13_row, column];
+            }
+
+            Debug.Log(
+                $"Row {as13_row} = {sum}"
+            );
         }
 
         /*
@@ -580,7 +746,18 @@ namespace Assignment
         public void AS14_SumOfNumbersInColumn()
         {
             var matrix = as14_matrix.Get2DArray();
-            throw new NotImplementedException();
+            int sum = 0;
+
+            for (int row = 0;
+                 row < matrix.GetLength(0);
+                 row++)
+            {
+                sum += matrix[row, as14_column];
+            }
+
+            Debug.Log(
+                $"Column {as14_column} = {sum}"
+            );
         }
 
         /*
@@ -630,7 +807,20 @@ namespace Assignment
         public int as15_size;
         public void AS15_MakeTheTriangle()
         {
-            throw new NotImplementedException();
+            Debug.Log($"Size ...");
+            Debug.Log(as15_size);
+
+            for (int i = 1; i <= as15_size; i++)
+            {
+                string line = "";
+
+                for (int j = 1; j <= i; j++)
+                {
+                    line += "*";
+                }
+
+                Debug.Log(line);
+            }
         }
 
         /*
@@ -659,7 +849,22 @@ namespace Assignment
          */
         public void AS16_MultiplicationTableOf_2_3_and_4()
         {
-            throw new NotImplementedException();
+            for (int i = 1; i <= 12; i++)
+            {
+                string line = "";
+
+                for (int j = 2; j <= 4; j++)
+                {
+                    line += $"{j} x {i} = {j * i}";
+
+                    if (j < 4)
+                    {
+                        line += "\t";
+                    }
+                }
+
+                Debug.Log(line);
+            }
         }
 
         #endregion
@@ -870,38 +1075,150 @@ namespace Assignment
         {
             rows = 3,
             cols = 3,
-            data = new string[] {
-                "X", "X", "O",
-                "X", "O", "X",
-                "", "", ""
-            }
+            data = new string[]
+     {
+        "X", "X", "O",
+        "X", "O", "X",
+        "", "", ""
+     }
         };
-        public string ex01_playerTurn = "O";//กรอกเป็น X พิมพ์ใหญ่หรือ O พิมพ์ใหญ่เท่านั้น
+
+        public string ex01_playerTurn = "O";
         public int ex01_row = 2;
         public int ex01_column = 0;
+
         public void EX_01_TicTacToeGame_TurnPlay()
         {
             var board = ex01_board.Get2DArray();
-            throw new NotImplementedException();
+
+            if (ex01_playerTurn != "X" &&
+                ex01_playerTurn != "O")
+            {
+                Debug.Log("Invalid move");
+                return;
+            }
+
+            if (ex01_row < 0 ||
+                ex01_row >= 3 ||
+                ex01_column < 0 ||
+                ex01_column >= 3)
+            {
+                PrintBoard(board);
+                Debug.Log(">> Invalid move");
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(board[ex01_row, ex01_column]))
+            {
+                PrintBoard(board);
+
+                Debug.Log(
+                    $"cannot set {ex01_playerTurn} at {ex01_row} {ex01_column}"
+                );
+
+                Debug.Log(">> Invalid move");
+                return;
+            }
+
+            board[ex01_row, ex01_column] = ex01_playerTurn;
+
+            PrintBoard(board);
+
+            if (CheckWin(board, ex01_playerTurn))
+            {
+                Debug.Log($">> {ex01_playerTurn} Win!");
+                return;
+            }
+
+            bool full = true;
+
+            for (int row = 0; row < 3; row++)
+            {
+                for (int column = 0; column < 3; column++)
+                {
+                    if (string.IsNullOrEmpty(board[row, column]))
+                    {
+                        full = false;
+                    }
+                }
+            }
+
+            if (full)
+            {
+                Debug.Log(">> Draw");
+            }
+            else
+            {
+                Debug.Log(">> Continue");
+            }
         }
-        #endregion
+
+        private bool CheckWin(string[,] board, string player)
+        {
+            for (int row = 0; row < 3; row++)
+            {
+                if (board[row, 0] == player &&
+                    board[row, 1] == player &&
+                    board[row, 2] == player)
+                {
+                    return true;
+                }
+            }
+
+            for (int column = 0; column < 3; column++)
+            {
+                if (board[0, column] == player &&
+                    board[1, column] == player &&
+                    board[2, column] == player)
+                {
+                    return true;
+                }
+            }
+
+            if (board[0, 0] == player &&
+                board[1, 1] == player &&
+                board[2, 2] == player)
+            {
+                return true;
+            }
+
+            if (board[0, 2] == player &&
+                board[1, 1] == player &&
+                board[2, 0] == player)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         private void PrintBoard(string[,] board)
         {
-            StringBuilder sb = new();
+            StringBuilder sb = new StringBuilder();
+
             for (int i = 0; i < 3; i++)
             {
                 sb.AppendLine("-------------");
-                sb.AppendLine("| " + spaceIfEmpty(board[i, 0]) + " | " + spaceIfEmpty(board[i, 1]) + " | " + spaceIfEmpty(board[i, 2]) + " |");
+
+                string cell0 = string.IsNullOrEmpty(board[i, 0]) ? " " : board[i, 0];
+                string cell1 = string.IsNullOrEmpty(board[i, 1]) ? " " : board[i, 1];
+                string cell2 = string.IsNullOrEmpty(board[i, 2]) ? " " : board[i, 2];
+
+                sb.AppendLine(
+                    "| " + cell0 +
+                    " | " + cell1 +
+                    " | " + cell2 +
+                    " |"
+                );
             }
+
             sb.AppendLine("-------------");
+
             Debug.Log(sb.ToString());
         }
 
-        private string spaceIfEmpty(string value)
-        {
-            return string.IsNullOrEmpty(value) ? " " : value;
-        }
+        #endregion
+
     }
 
 }
